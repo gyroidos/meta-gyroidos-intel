@@ -50,17 +50,6 @@ IMAGE_ROOTFS_SIZE = "4096"
 
 KERNELVERSION="$(cat "${STAGING_KERNEL_BUILDDIR}/kernel-abiversion")"
 
-update_fstab () {
-
-    mkdir -p ${IMAGE_ROOTFS}/data
-    cat >> ${IMAGE_ROOTFS}/etc/fstab <<EOF
-
-tmpfs /tmp tmpfs defaults 0 0
-
-/dev/disk/by-label/trustmeinstaller /mnt ext4 defaults 0 0
-EOF
-}
-
 update_inittab () {
     sed -i "/ttyS[[:digit:]]\+/d" ${IMAGE_ROOTFS}/etc/inittab
 
@@ -74,7 +63,6 @@ update_modules_dep () {
 	sh -c 'cd "${IMAGE_ROOTFS}" && depmod --basedir "${IMAGE_ROOTFS}" --config "${IMAGE_ROOTFS}/etc/depmod.d" ${KERNELVERSION}'
 }
 
-ROOTFS_POSTPROCESS_COMMAND_append = " update_fstab; "
 ROOTFS_POSTPROCESS_COMMAND_append = " update_modules_dep; "
 
 # For debug purpose allow login if debug-tweaks is set in local.conf

@@ -4,40 +4,47 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
 echo "-----------------trustm3 installer------------------"
 
+mkdir -p /lib/firmware
 mkdir -p /proc
 mkdir -p /sys
+mkdir -p /run
 
-mount -t proc proc /proc
-mount -t sysfs sysfs /sys
-mount -t devtmpfs none /dev
+mount /proc
+mount /sys
+mount /dev
+mount /run
+
+mkdir -p /dev/pts
+mount /dev/pts
 
 mkdir -p /dev/shm
-mkdir -p /run
-mkdir -p /var/run
+mkdir -p /data
 
 udevd --daemon
-
-udevadm trigger --action=add
-udevadm settle 
-
-sleep 5
+udevadm trigger --type=subsystems --action=add
+sleep 2
+udevadm settle
+udevadm trigger --type=devices --action=add
+sleep 2
+udevadm settle
 
 mount -a
 
-sleep 5
-
-mount --bind /mnt/modules /lib/modules
-mount --bind /mnt/firmware /lib/firmware
-mount --bind /mnt/userdata /data
-
-mkdir -p /data/logs
-
-
 #now modules partition is mounted
-udevadm trigger --action=add
-udevadm settle
+echo "Waiting for devices ."
+for i in {1..4}; do
+	echo -n "."
+	udevadm trigger --type=subsystems --action=add
+	sleep 2
+	udevadm settle
+	udevadm trigger --type=devices --action=add
+	sleep 2
+	udevadm settle
+done
 
 modprobe loop
 modprobe btrfs
+
+mount -a
 
 exec /sbin/init
