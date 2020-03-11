@@ -24,7 +24,6 @@ do_installer_bootpart[depends] = " \
     parted-native:do_populate_sysroot \
     mtools-native:do_populate_sysroot \
     dosfstools-native:do_populate_sysroot \
-    btrfs-tools-native:do_populate_sysroot \
     gptfdisk-native:do_populate_sysroot \
     sbsigntool-native:do_populate_sysroot \
 	virtual/kernel:do_deploy \
@@ -91,7 +90,6 @@ do_image_trustmeinstaller[depends] = " \
     parted-native:do_populate_sysroot \
     mtools-native:do_populate_sysroot \
     dosfstools-native:do_populate_sysroot \
-    btrfs-tools-native:do_populate_sysroot \
     gptfdisk-native:do_populate_sysroot \
     virtual/kernel:do_deploy \
 "
