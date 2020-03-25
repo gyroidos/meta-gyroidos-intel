@@ -22,7 +22,6 @@ do_image_trustmekeytool[depends] = " \
     parted-native:do_populate_sysroot \
     mtools-native:do_populate_sysroot \
     dosfstools-native:do_populate_sysroot \
-    btrfs-tools-native:do_populate_sysroot \
     gptfdisk-native:do_populate_sysroot \
     pki-native:do_populate_sysroot \
 "

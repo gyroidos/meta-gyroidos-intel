@@ -22,7 +22,6 @@ PACKAGE_INSTALL = "\
 	e2fsprogs-resize2fs \
 	e2fsprogs-mke2fs \
 	e2fsprogs-e2fsck \
-	btrfs-tools \
 	kvmtool \
 	${ROOTFS_BOOTSTRAP_INSTALL} \
 	installer-boot \
