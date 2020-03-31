@@ -12,5 +12,5 @@ tmpfs                       /tmp           tmpfs     defaults              0  0
 LABEL=trustmeinstaller      /mnt           ext4      defaults              0  0
 
 /mnt/userdata               /data          none      bind,defaults         0  0
-/data/trustme_data/modules  /lib/modules   none      bind,nosuid,nodev,noexec 0  0
-/data/trustme_data/firmware /lib/firmware  none      bind,nosuid,nodev,noexec 0  0
+/data/trustme_data/modules.img   /lib/modules   squashfs      loop,nosuid,nodev,noexec 0  0
+/data/trustme_data/firmware.img  /lib/firmware  squashfs      loop,nosuid,nodev,noexec 0  0
