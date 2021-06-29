@@ -1,0 +1,45 @@
+From 443664ec67e5f5967509ef0fb8144bf84ec0661a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Michael=20Wei=C3=9F?= <michael.weiss@aisec.fraunhofer.de>
+Date: Tue, 29 Jun 2021 13:54:09 +0200
+Subject: [PATCH] lib/console: compatibly fix to upstream change of gnu-efi
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+In gnu-efi, the typo in the define EFI_WARN_UNKOWN_GLYPH was fixed.
+Thus, we change this here to but maintain compatibility to older
+versions of gnu-efi.
+
+Signed-off-by: Michael Weiß <michael.weiss@aisec.fraunhofer.de>
+---
+ lib/console.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/lib/console.c b/lib/console.c
+index 9c10560..401f4e6 100644
+--- a/lib/console.c
++++ b/lib/console.c
+@@ -9,6 +9,11 @@
+ #include <console.h>
+ #include <errors.h>
+ 
++// fixed typo in upstrem gnu-efi project
++#ifndef EFI_WARN_UNKNOWN_GLYPH
++#define EFI_WARN_UNKNOWN_GLYPH	EFIWARN(1)
++#endif
++
+ static int min(int a, int b)
+ {
+ 	if (a < b)
+@@ -357,7 +362,7 @@ static struct {
+ 	{  EFI_SECURITY_VIOLATION,     L"Security Violation"},
+ 
+ 	// warnings
+-	{  EFI_WARN_UNKOWN_GLYPH,      L"Warning Unknown Glyph"},
++	{  EFI_WARN_UNKNOWN_GLYPH,     L"Warning Unknown Glyph"},
+ 	{  EFI_WARN_DELETE_FAILURE,    L"Warning Delete Failure"},
+ 	{  EFI_WARN_WRITE_FAILURE,     L"Warning Write Failure"},
+ 	{  EFI_WARN_BUFFER_TOO_SMALL,  L"Warning Buffer Too Small"},
+-- 
+2.20.1
+
