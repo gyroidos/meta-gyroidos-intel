@@ -225,7 +225,7 @@ IMAGE_CMD_trustmeinstaller () {
 
 	# Create boot partition and mark it as bootable
 	bootpart_size_targetblocks="$(du --block-size=${INSTALLER_TARGET_ALIGN} -s ${INSTALLER_BOOTPART_DIR} | awk '{print $1}')"
-	bootpart_size_targetblocks="$(python -c "print(str($bootpart_size_targetblocks + ($bootpart_size_targetblocks * ${INSTALLER_BOOTPART_EXTRA_FACTOR}))[:-2])")"
+	bootpart_size_targetblocks="$(echo ${bootpart_size_targetblocks} '*' ${INSTALLER_BOOTPART_EXTRA_FACTOR} '/' 1 | bc)"
 	bootpart_size_bytes="$(expr $bootpart_size_targetblocks '*' ${INSTALLER_TARGET_ALIGN})"
 	# append space to bootpart if INSTALLER_TARGET_ALIGN < 1024 (mkdisfs block size)
 	if ! [ "$(expr $bootpart_size_bytes '%' 1024)"="0" ]; then
@@ -239,7 +239,7 @@ IMAGE_CMD_trustmeinstaller () {
 	bootpart_size_1k="$(expr $bootpart_size_bytes '/' 1024)"
 
 	datapart_size_targetblocks="$(du --block-size=${INSTALLER_TARGET_ALIGN} -s ${tmp_datapart} | awk '{print $1}')"
-	datapart_size_targetblocks="$(python -c "print(str($datapart_size_targetblocks + ($datapart_size_targetblocks * ${INSTALLER_BOOTPART_EXTRA_FACTOR}))[:-2])")"
+	datapart_size_targetblocks="$(echo ${datapart_size_targetblocks} '*' ${INSTALLER_BOOTPART_EXTRA_FACTOR} '/' 1 | bc)"
 	datapart_size_bytes="$(expr $datapart_size_targetblocks '*' ${INSTALLER_TARGET_ALIGN})"
 	datafolder_size="$(expr $datapart_size_targetblocks '*' ${INSTALLER_TARGET_ALIGN})"
 	bbnote "Data files size: $datafolder_size bytes"
