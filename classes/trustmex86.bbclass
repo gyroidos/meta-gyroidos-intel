@@ -18,13 +18,10 @@ TRUSTME_IMAGE="${TRUSTME_IMAGE_OUT}/trustmeimage.img"
 
 TRUSTME_DEFAULTCONFIG="trustx-core.conf"
 
-do_image_trustmex86[depends] += " \
+do_uefi_bootpart[depends] += " \
     sbsigntool-native:do_populate_sysroot \
+    ${TRUSTME_GENERIC_DEPENDS} \
 "
-
-
-do_image_trustmex86[depends] += " ${TRUSTME_GENERIC_DEPENDS} "
-
 
 do_uefi_bootpart () {
 	rm -fr ${TRUSTME_BOOTPART_DIR}
@@ -67,9 +64,8 @@ do_uefi_bootpart () {
 
 IMAGE_CMD_trustmex86 () {
 	bbnote  "Using standard trustme partition"
-	do_uefi_bootpart
 	do_build_trustmeimage
 }
 
-#addtask do_uefi_bootpart before IMAGE_CMD_trustmex86
+addtask do_uefi_bootpart before IMAGE_CMD_trustmex86
 #addtask do_build_trustmeimage after do_uefi_bootpart

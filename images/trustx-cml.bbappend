@@ -3,7 +3,7 @@ inherit trustmex86
 ##### provide a tarball for cml update
 include images/trustx-signing.inc
 deltask do_sign_guestos
-addtask do_sign_guestos before do_image
+addtask do_sign_guestos after do_uefi_bootpart before do_image_trustmex86
 
 GUESTS_OUT = "${DEPLOY_DIR_IMAGE}/cml_updates"
 CLEAN_GUEST_OUT = ""
