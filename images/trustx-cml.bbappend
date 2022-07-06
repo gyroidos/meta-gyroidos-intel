@@ -2,11 +2,14 @@ inherit trustmex86
 
 ##### provide a tarball for cml update
 include images/trustx-signing.inc
+deltask do_sign_guestos
+addtask do_sign_guestos before do_image
 
 GUESTS_OUT = "${DEPLOY_DIR_IMAGE}/cml_updates"
 CLEAN_GUEST_OUT = ""
 OS_NAME = "kernel"
 UPDATE_OUT="${GUESTS_OUT}/${OS_NAME}-${TRUSTME_VERSION}"
+UPDATE_FILES="${UPDATE_OUT} ${UPDATE_OUT}.conf ${UPDATE_OUT}.sig ${UPDATE_OUT}.cert"
 
 do_sign_guestos_prepend () {
 	mkdir -p "${UPDATE_OUT}"
