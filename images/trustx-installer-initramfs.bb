@@ -30,6 +30,7 @@ PACKAGE_INSTALL = "\
 	parted \
 	util-linux-sfdisk \
 	dosfstools \
+	installer-keytool \
 "
 
 IMAGE_LINUGUAS = " "
