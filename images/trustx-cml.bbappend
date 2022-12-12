@@ -5,11 +5,12 @@ include images/trustx-signing.inc
 deltask do_sign_guestos
 addtask do_sign_guestos after do_uefi_bootpart before do_image_trustmex86
 
-GUESTS_OUT = "${DEPLOY_DIR_IMAGE}/cml_updates"
+GUESTS_OUT = "${B}/cml_updates"
 CLEAN_GUEST_OUT = ""
 OS_NAME = "kernel"
-UPDATE_OUT="${GUESTS_OUT}/${OS_NAME}-${TRUSTME_VERSION}"
-UPDATE_FILES="${UPDATE_OUT} ${UPDATE_OUT}.conf ${UPDATE_OUT}.sig ${UPDATE_OUT}.cert"
+UPDATE_OUT_GENERIC="${GUESTS_OUT}/${OS_NAME}"
+UPDATE_OUT="${UPDATE_OUT_GENERIC}-${TRUSTME_VERSION}"
+UPDATE_FILES="${UPDATE_OUT_GENERIC} ${UPDATE_OUT_GENERIC}.conf ${UPDATE_OUT_GENERIC}.sig ${UPDATE_OUT_GENERIC}.cert"
 
 do_sign_guestos:prepend () {
 	mkdir -p "${UPDATE_OUT}"
@@ -24,4 +25,9 @@ do_sign_guestos:append () {
 		"${OS_NAME}-${TRUSTME_VERSION}.conf" \
 		"${OS_NAME}-${TRUSTME_VERSION}.sig" \
 		"${OS_NAME}-${TRUSTME_VERSION}.cert"
+
+	ln -sf "$(basename ${UPDATE_OUT})" "${UPDATE_OUT_GENERIC}"
+	ln -sf "$(basename ${UPDATE_OUT}.conf)" "${UPDATE_OUT_GENERIC}.conf"
+	ln -sf "$(basename ${UPDATE_OUT}.cert)" "${UPDATE_OUT_GENERIC}.cert"
+	ln -sf "$(basename ${UPDATE_OUT}.sig)" "${UPDATE_OUT_GENERIC}.sig"
 }
