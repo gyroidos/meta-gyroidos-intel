@@ -9,3 +9,5 @@ SRC_URI += " \
 FILESEXTRAPATHS:prepend := "${THISDIR}/linux-debian:${THISDIR}/generic:"
 
 #KBUILD_DEFCONFIG:genericx86-64 := "${THISDIR}/generic/defconfig"
+
+require uefi-sign.inc

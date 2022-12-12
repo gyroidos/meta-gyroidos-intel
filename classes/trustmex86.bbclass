@@ -4,7 +4,6 @@ inherit trustmegeneric
 #
 
 do_uefi_bootpart[depends] += " \
-    sbsigntool-native:do_populate_sysroot \
     ${TRUSTME_GENERIC_DEPENDS} \
 "
 
@@ -26,14 +25,7 @@ do_uefi_bootpart () {
 		exit 1
 	fi
 
-	bbnote "Signing kernel binary"
-	kernelbin="${DEPLOY_DIR_IMAGE}/cml-kernel/bzImage-initramfs-${MACHINE}.bin"
-	if [ -L "${kernelbin}" ]; then
-	    link=`readlink "${kernelbin}"`
-	    ln -sf ${link}.signed ${kernelbin}.signed
-	fi
-
-	sbsign --key "${SECURE_BOOT_SIGNING_KEY}" --cert "${SECURE_BOOT_SIGNING_CERT}" --output "${kernelbin}.signed" "${kernelbin}"
+	kernelbin="${DEPLOY_DIR_IMAGE}/cml-kernel/bzImage-initramfs-${MACHINE}.bin.signed"
 
 	bbnote "Copying boot partition files to ${TRUSTME_BOOTPART_DIR}"
 
@@ -42,15 +34,13 @@ do_uefi_bootpart () {
 
 	install -d "${TRUSTME_BOOTPART_DIR}/EFI/BOOT/"
 	install -d "${TRUSTME_IMAGE_OUT}"
-	cp --dereference "${DEPLOY_DIR_IMAGE}/cml-kernel/bzImage-initramfs-${machine}.bin.signed" "${TRUSTME_BOOTPART_DIR}/EFI/BOOT/BOOTX64.EFI"
-	cp --dereference "${DEPLOY_DIR_IMAGE}/cml-kernel/bzImage-initramfs-${machine}.bin.signed" "${TRUSTME_IMAGE_OUT}/cml-kernel.signed"
+	cp --dereference "${kernelbin}" "${TRUSTME_BOOTPART_DIR}/EFI/BOOT/BOOTX64.EFI"
+	cp --dereference "${kernelbin}" "${TRUSTME_IMAGE_OUT}/cml-kernel.signed"
 }
 
 
 IMAGE_CMD:trustmex86 () {
 	bbnote  "Using standard trustme partition"
+	do_uefi_bootpart
 	do_build_trustmeimage
 }
-
-addtask do_uefi_bootpart before IMAGE_CMD:trustmex86
-#addtask do_build_trustmeimage after do_uefi_bootpart
