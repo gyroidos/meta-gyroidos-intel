@@ -6,3 +6,5 @@ SRC_URI += " \
 "
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/generic:"
+
+require uefi-sign.inc
