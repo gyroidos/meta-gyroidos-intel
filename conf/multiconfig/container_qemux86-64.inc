@@ -6,7 +6,7 @@ PACKAGE_CLASSES = "package_deb"
 
 TMPDIR = "${TOPDIR}/tmp_container"
 
-EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+EXTRA_IMAGE_FEATURES:append = " debug-tweaks"
 
 USER_CLASSES ?= "buildstats"
 
