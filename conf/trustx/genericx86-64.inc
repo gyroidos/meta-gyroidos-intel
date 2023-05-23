@@ -16,8 +16,8 @@ PKI_UEFI_KEYS = "y"
 PACKAGE_CLASSES = "package_ipk"
 BBMULTICONFIG = "container installer"
 
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-vanilla"
-PREFERRED_PROVIDER_virtual/kernel:poky-tiny ?= "linux-vanilla"
+PREFERRED_PROVIDER_virtual/kernel:genericx86-64 ?= "linux-rolling-stable"
+PREFERRED_PROVIDER_virtual/kernel:gyroidos-cml ?= "linux-rolling-stable"
 
 INITRAMFS_MODULES = ""
 
