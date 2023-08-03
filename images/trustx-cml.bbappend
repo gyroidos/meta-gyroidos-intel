@@ -34,3 +34,10 @@ do_sign_guestos:append () {
 	ln -sf "$(basename ${UPDATE_OUT}.cert)" "${UPDATE_OUT_GENERIC}.cert"
 	ln -sf "$(basename ${UPDATE_OUT}.sig)" "${UPDATE_OUT_GENERIC}.sig"
 }
+
+OS_CONFIG_IN := "${THISDIR}/${PN}/${OS_NAME}.conf"
+OS_CONFIG = "${WORKDIR}/${OS_NAME}.conf"
+prepare_kernel_conf () {
+    cp "${OS_CONFIG_IN}" "${OS_CONFIG}"
+}
+IMAGE_PREPROCESS_COMMAND:append = " prepare_kernel_conf;"
