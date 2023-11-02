@@ -7,6 +7,9 @@ KERNEL_DEPLOYSUBDIR ?= "cml-kernel"
 
 do_deploy:append () {
 	kernelbin="${DEPLOYDIR}/${KERNEL_DEPLOYSUBDIR}/bzImage-initramfs-${MACHINE}.bin"
+	if [ ${INITRAMFS_IMAGE_BUNDLE} != "1" ]; then
+		kernelbin="${DEPLOYDIR}/${KERNEL_DEPLOYSUBDIR}/bzImage-${MACHINE}.bin"
+	fi
 	kernelbin_signed="${kernelbin}.signed"
 	if [ -L "${kernelbin}" ]; then
 		link=`readlink "${kernelbin}"`
