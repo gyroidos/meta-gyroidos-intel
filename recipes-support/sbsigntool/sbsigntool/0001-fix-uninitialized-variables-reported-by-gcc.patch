@@ -1,0 +1,24 @@
+From a75c81c67a0d94d706c9ef84d2b510b5afea492f Mon Sep 17 00:00:00 2001
+From: Johannes Wiesboeck <johannes.wiesboeck@aisec.fraunhofer.de>
+Date: Tue, 5 Dec 2023 12:27:08 +0000
+Subject: [PATCH] fix uninitialized variables reported by gcc
+
+---
+ src/fileio.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/fileio.c b/src/fileio.c
+index 032eb1e..9f7e7f3 100644
+--- a/src/fileio.c
++++ b/src/fileio.c
+@@ -142,8 +142,8 @@ static int __fileio_read_file(void *ctx, const char *filename,
+ 		 uint8_t **out_buf, size_t *out_len, int flags)
+ {
+ 	struct stat statbuf;
+-	uint8_t *buf;
+-	size_t len;
++	uint8_t *buf = NULL;
++	size_t len = 0;
+ 	int fd, rc;
+ 
+ 	rc = -1;
