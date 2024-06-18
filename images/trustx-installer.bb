@@ -7,6 +7,8 @@ IMAGE_FSTYPES="wic wic.bmap"
 INITRAMFS_IMAGE_BUNDLE = "1"
 INITRAMFS_IMAGE = "trustx-installer-initramfs"
 
+TRUSTME_DATAPART_LABEL = "trustmeinstaller"
+
 do_rootfs () {
 	cml_deploydir="${TOPDIR}/tmp/deploy/images/${MACHINE}"
 	cmldata="${cml_deploydir}/trustme_image/trustme_datapartition"
