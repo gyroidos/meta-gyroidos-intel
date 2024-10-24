@@ -17,14 +17,12 @@ do_deploy:append () {
 	fi
 
 	certpath="${SECURE_BOOT_SIG_CERT}"
-	if [[ "${SECURE_BOOT_SIG_CERT}" == pkcs11:* ]] # BASH-if on purpose
-	then
+	if is_pkcs11_uri ${SECURE_BOOT_SIG_CERT}; then
 		certpath="${WORKDIR}/SECURE_BOOT_SIG_CERT.pem"
 		extract_cert "${SECURE_BOOT_SIG_CERT}" $certpath
 	fi
 
-	if [[ "${SECURE_BOOT_SIG_KEY}" == pkcs11:* ]] # BASH-if on purpose
-	then
+	if is_pkcs11_uri ${SECURE_BOOT_SIG_KEY}; then
 		sbsign --engine pkcs11 --key "${SECURE_BOOT_SIG_KEY}" --cert "$certpath" --output "${kernelbin_signed}" "${kernelbin}"
 	else
 		sbsign --key "${SECURE_BOOT_SIG_KEY}" --cert "$certpath" --output "${kernelbin_signed}" "${kernelbin}"
