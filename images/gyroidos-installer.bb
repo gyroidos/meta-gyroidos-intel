@@ -5,7 +5,7 @@ DEPENDS += "coreutils-native virtual/kernel"
 IMAGE_FSTYPES="wic wic.bmap"
 
 INITRAMFS_IMAGE_BUNDLE = "1"
-INITRAMFS_IMAGE = "trustx-installer-initramfs"
+INITRAMFS_IMAGE = "gyroidos-installer-initramfs"
 
 GYROIDOS_DATAPART_LABEL = "gyroidosinstaller"
 
@@ -22,7 +22,7 @@ do_rootfs () {
 	rm -fr "${rootfs_datadir}"
 	install -d "${rootfs_datadir}"
 
-	# copy files created by trustx-cml recipe to installer data directory
+	# copy files created by gyroidos-cml recipe to installer data directory
 	bbnote "Preparing files for data partition"
 
 	install -d "${rootfs_datadir}/gyroidos_boot/EFI/BOOT/"

@@ -39,7 +39,7 @@ LICENSE = "GPL-2.0-only"
 
 IMAGE_FEATURES = ""
 
-export IMAGE_BASENAME = "trustx-installer-initramfs"
+export IMAGE_BASENAME = "gyroidos-installer-initramfs"
 IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
 inherit image
 

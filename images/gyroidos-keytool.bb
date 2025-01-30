@@ -10,7 +10,7 @@ LICENSE = "GPL-2.0-only"
 
 IMAGE_FEATURES = ""
 
-export IMAGE_BASENAME = "trustx-keytool"
+export IMAGE_BASENAME = "gyroidos-keytool"
 IMAGE_FSTYPES = "gyroidoskeytool"
 inherit image
 

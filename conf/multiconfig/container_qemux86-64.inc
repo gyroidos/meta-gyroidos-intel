@@ -1,6 +1,6 @@
 MACHINE = "qemux86-64"
 
-DISTRO = "gyroidos-core"
+DISTRO = "core-ref"
 
 PACKAGE_CLASSES = "package_deb"
 

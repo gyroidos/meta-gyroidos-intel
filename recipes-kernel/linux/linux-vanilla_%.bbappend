@@ -1,7 +1,7 @@
 COMPATIBLE_MACHINE = "${MACHINE}"
 
 SRC_URI += " \
-    file://trustx-intel.cfg \
+    file://gyroidos-intel.cfg \
     file://qemu.cfg \
 "
 
