@@ -24,7 +24,7 @@ PREFERRED_PROVIDER_virtual/kernel:linuxstdbase = "linux-dummy"
 IMAGE_FSTYPES = "cpio.gz ext4"
 INITRAMFS_IMAGE = ""
 
-TRUSTME_HARDWARE = "x86"
+GYROIDOS_HARDWARE = "x86"
 
 # Possible provider: cacao-initial-native and jamvm-initial-native
 PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
