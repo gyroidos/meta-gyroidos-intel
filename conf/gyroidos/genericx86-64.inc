@@ -6,7 +6,7 @@ INITRAMFS_IMAGE = "gyroidos-cml-initramfs"
 IMAGE_FSTYPES = "cpio ext4"
 GYROIDOS_FSTYPES = "wic wic.bmap"
 GYROIDOS_PARTTABLE_TYPE = "gpt"
-GYROIDOS_CONTAINER_ARCH = "qemux86-64"
+GYROIDOS_GUESTOS_ARCH = "qemux86-64"
 
 GYROIDOS_HARDWARE = "x86"
 GYROIDOS_LOGTTY = "tty11"
@@ -14,7 +14,7 @@ GYROIDOS_LOGTTY = "tty11"
 PKI_UEFI_KEYS = "y"
 
 PACKAGE_CLASSES = "package_ipk"
-BBMULTICONFIG = "container installer"
+BBMULTICONFIG = "guestos installer"
 
 PREFERRED_PROVIDER_virtual/kernel:genericx86-64 ?= "linux-rolling-stable"
 PREFERRED_PROVIDER_virtual/kernel:gyroidos-cml ?= "linux-rolling-stable"
