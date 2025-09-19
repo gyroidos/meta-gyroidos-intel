@@ -8,6 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e28f66b16cb46be47b20a4cdfe6e99a1"
 
 SRC_URI = "https://git.kernel.org/pub/scm/linux/kernel/git/jejb/efitools.git/snapshot/efitools_${PV}.tar.gz"
 SRC_URI += "file://0001-lib-console-compatibly-fix-to-upstream-change-of-gnu.patch"
-SRC_URI += "file://0001-Fix-includes-for-strptime.patch"
+SRC_URI += "file://0001-flash-var-sign-efi-sig-list-Fix-include-for-strptime.patch"
 
 S = "${WORKDIR}/efitools_${PV}"
