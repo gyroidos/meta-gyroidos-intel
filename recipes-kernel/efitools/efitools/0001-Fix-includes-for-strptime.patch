@@ -1,0 +1,38 @@
+From 9cf5ad3f1926c32860e5209c51737e567f446212 Mon Sep 17 00:00:00 2001
+From: Felix Wruck <felix.wruck@aisec.fraunhofer.de>
+Date: Fri, 19 Sep 2025 10:49:49 +0200
+Subject: [PATCH] Fix includes for strptime
+
+---
+ flash-var.c         | 3 +++
+ sign-efi-sig-list.c | 3 +++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/flash-var.c b/flash-var.c
+index aa10ae6..007ff68 100644
+--- a/flash-var.c
++++ b/flash-var.c
+@@ -1,3 +1,6 @@
++#define _XOPEN_SOURCE
++#include <time.h>
++
+ #include <stdlib.h>
+ #include <stdint.h>
+ #include <sys/types.h>
+diff --git a/sign-efi-sig-list.c b/sign-efi-sig-list.c
+index 94bd7d4..7a4c91b 100644
+--- a/sign-efi-sig-list.c
++++ b/sign-efi-sig-list.c
+@@ -3,6 +3,9 @@
+  *
+  * see COPYING file
+  */
++#define _XOPEN_SOURCE
++#include <time.h>
++
+ #include <stdint.h>
+ #define __STDC_VERSION__ 199901L
+ #include <efi.h>
+-- 
+2.47.3
+
