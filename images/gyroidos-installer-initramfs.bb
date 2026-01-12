@@ -44,6 +44,8 @@ IMAGE_FEATURES = ""
 
 export IMAGE_BASENAME = "gyroidos-installer-initramfs"
 IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
+IMAGE_NAME_SUFFIX = ""
+
 inherit image
 
 IMAGE_FEATURES:remove = "package-management"
