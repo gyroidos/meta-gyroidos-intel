@@ -33,6 +33,9 @@ PACKAGE_INSTALL = "\
 	installer-keytool \
 "
 
+# shadow-base is removed by poky-tiny, the required CONFIG_MULTIUSER is set in our kernel config
+PACKAGE_EXCLUDE:remove = '${@oe.utils.vartrue('DEVELOPMENT_BUILD', "shadow-base", "",d)}'
+
 IMAGE_LINUGUAS = " "
 
 LICENSE = "GPL-2.0-only"
